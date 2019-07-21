@@ -48,7 +48,12 @@ namespace WebsiteDetector.Services
         {
             var result = websitesUrlsList.Select(async check => await CheckIsAvailable(check, token)).ToList();
             var asd = await Task.WhenAll(result);
-            
+
+            if (token.IsCancellationRequested)
+            {
+                return;
+            }
+
             foreach (var url in asd)
             {
                 messagesService.PublicateResults(url);
@@ -82,6 +87,8 @@ namespace WebsiteDetector.Services
         public void Stop()
         {
             cancellationTokenSource.Cancel();
+            messagesService.ClearScreen();
+            messagesService.SendWelcomeMessage();
         }
     }
 }
