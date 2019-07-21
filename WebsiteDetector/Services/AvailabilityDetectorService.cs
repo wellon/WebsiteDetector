@@ -17,13 +17,15 @@ namespace WebsiteDetector.Services
         private readonly IMessagesService messagesService;
         private readonly IList<string> websitesUrlsList;
         private readonly HttpClient client;
+        private readonly int delay;
 
-        public AvailabilityDetectorService(WebsitesConfig config, IMessagesService messagesService, HttpClient client)
+        public AvailabilityDetectorService(WebsitesConfig config, HttpClient client, IMessagesService messagesService)
         {
             this.websitesUrlsList = config.Websites.ToList();
             this.messagesService = messagesService;
             this.client = client;
-            this.client.Timeout = TimeSpan.FromSeconds(3);
+            this.client.Timeout = TimeSpan.FromSeconds(config.TimeoutInSeconds);
+            this.delay = config.DelayInMilliseconds;
         }
 
         public void Start()
@@ -51,7 +53,7 @@ namespace WebsiteDetector.Services
                 messagesService.PublicateResults(url);
             }
 
-            await Task.Delay(3000);
+            await Task.Delay(delay);
         }
 
         private async Task<WebsiteStatusResult> CheckIsAvailable(string url, CancellationToken token)
