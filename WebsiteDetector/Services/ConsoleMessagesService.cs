@@ -9,8 +9,14 @@ namespace WebsiteDetector.Services
         public void SendWelcomeMessage()
         {
             Console.WriteLine(
-                $"Введите 1, чтобы запустить процесс\n" +
-                $"Введите 2, чтобы остановить процесс\n");
+                $"Enter 1, to start process\n" +
+                $"Enter 2, to stop process\n");
+        }
+
+        public void SendWorkInProgressMessage()
+        {
+            Console.WriteLine(
+                $"Checking websites availability...");
         }
 
         public void PublicateResults(WebsiteStatusResult statusResult)

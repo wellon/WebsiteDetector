@@ -38,6 +38,7 @@ namespace WebsiteDetector.Services
                 {
                     messagesService.ClearScreen();
                     messagesService.SendWelcomeMessage();
+                    messagesService.SendWorkInProgressMessage();
                     await ProcessSiteCheck(token);
                 }
             }, token, TaskCreationOptions.LongRunning);
