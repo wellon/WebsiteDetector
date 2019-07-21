@@ -21,7 +21,10 @@ namespace WebsiteDetector.Services
 
         public void PublicateResults(WebsiteStatusResult statusResult)
         {
-            Console.WriteLine($"Website: {statusResult.Url} Status: {statusResult.IsAvailable}");
+            Console.BackgroundColor = statusResult.IsAvailable ? ConsoleColor.Green : ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine($"Website: {statusResult.Url} | IsAvailable: {statusResult.IsAvailable}");
+            Console.ResetColor();
         }
 
         public void ClearScreen()
