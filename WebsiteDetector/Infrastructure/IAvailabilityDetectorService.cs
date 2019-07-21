@@ -1,4 +1,4 @@
-﻿namespace WebsiteDetector.Services
+﻿namespace WebsiteDetector.Infrastructure
 {
     public interface IAvailabilityDetectorService
     {
